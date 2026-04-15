@@ -1,0 +1,20 @@
+baseURL = 'https://jonisoini.github.io/hugo-site/'
+languageCode = 'fi-fi'
+title = 'Lomatarina'
+theme = 'hello-friend'
+timeout = '120s'
+
+[build]
+writeStats = true
+
+[frontmatter]
+date = [":default"]
+
+[params]
+tripDateRange = '3.–9. huhtikuuta 2026'
+heroSubtitle = 'Seitsemän päivää Italian sydämessä – antiikin raunioista renessanssin helmiin'
+timelineIntro = 'Jokainen päivä oli oma seikkailunsa, täynnä yllätyksiä, herkullisia hetkiä ja ikimuistoisia näkyjä.'
+galleryIntro = 'Sadan kuvan sijaan tämä on se kymmenen kauneinta'
+footerNote = 'Generoitu autonomisesti Grok API + agentilla'
+enableDarkMode = true
+heroImage = 'https://picsum.photos/seed/roma-main/1920/1080'

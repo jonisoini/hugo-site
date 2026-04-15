@@ -1,0 +1,200 @@
+{{/* Base template for Lomatarina - overrides theme's baseof.html */}}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="scroll-smooth{{ if .Site.Params.enableDarkMode }} dark{{ end }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} – {{ end }}{{ .Site.Title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF7F2',
+                        sand: '#E8E0D5',
+                        terra: '#C4A77D',
+                        amber: '#D4A574',
+                        rust: '#8B5E3C',
+                        olive: '#6B7B5E',
+                        charcoal: '#2D2A26',
+                        slate: '#4A4540',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer base {
+            html { font-family: 'Inter', sans-serif; }
+            h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        }
+
+        @layer components {
+            .paper-texture {
+                background-color: #FAF7F2;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                background-blend-mode: soft-light;
+            }
+
+            @keyframes kenBurns {
+                0% { transform: scale(1) translate(0, 0); }
+                50% { transform: scale(1.08) translate(-1%, -1%); }
+                100% { transform: scale(1.05) translate(1%, 0.5%); }
+            }
+
+            .ken-burns { animation: kenBurns 20s ease-in-out infinite alternate; }
+
+            .vignette::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse at center, transparent 40%, rgba(45,42,38,0.5) 100%);
+                pointer-events: none;
+            }
+
+            .polaroid {
+                background: white;
+                padding: 12px 12px 40px 12px;
+                box-shadow: 0 8px 32px rgba(45,42,38,0.15), 0 2px 8px rgba(45,42,38,0.1);
+                transform: rotate(var(--rotation, 0deg));
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            }
+
+            .polaroid:hover {
+                transform: rotate(0deg) scale(1.02) translateY(-8px);
+                box-shadow: 0 20px 60px rgba(45,42,38,0.25), 0 8px 20px rgba(45,42,38,0.15);
+                z-index: 10;
+            }
+
+            .timeline-line { background: linear-gradient(to bottom, transparent, #C4A77D 10%, #C4A77D 90%, transparent); }
+
+            .timeline-dot {
+                width: 20px;
+                height: 20px;
+                background: #D4A574;
+                border: 3px solid #FAF7F2;
+                box-shadow: 0 0 0 3px #C4A77D;
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+            }
+
+            .timeline-item.visible .timeline-dot {
+                transform: scale(1.4);
+                background: #8B5E3C;
+                box-shadow: 0 0 0 3px #8B5E3C, 0 0 20px rgba(212,165,116,0.5);
+            }
+
+            .video-overlay::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(45,42,38,0.3);
+                transition: background 0.3s ease;
+            }
+
+            .video-overlay:hover::before { background: rgba(45,42,38,0.15); }
+
+            .play-btn {
+                width: 70px;
+                height: 70px;
+                background: rgba(255,255,255,0.95);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            }
+
+            .video-overlay:hover .play-btn { transform: scale(1.1); background: white; }
+
+            @keyframes revealUp {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .reveal { opacity: 0; }
+            .reveal.visible { animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(8px); }
+            }
+
+            .scroll-indicator { animation: bounce 2s ease-in-out infinite; }
+
+            .masonry { column-count: 2; column-gap: 1.5rem; }
+            @media (min-width: 768px) { .masonry { column-count: 3; } }
+            .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+
+            ::-webkit-scrollbar { width: 8px; }
+            ::-webkit-scrollbar-track { background: #FAF7F2; }
+            ::-webkit-scrollbar-thumb { background: #C4A77D; border-radius: 4px; }
+            ::-webkit-scrollbar-thumb:hover { background: #8B5E3C; }
+            .dark ::-webkit-scrollbar-track { background: #2D2A26; }
+        }
+    </style>
+    {{ if .Site.Params.enableDarkMode }}
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    {{ end }}
+    {{ block "head" . }}{{ end }}
+</head>
+<body class="bg-cream text-charcoal dark:bg-charcoal dark:text-cream dark-toggle-transition">
+    {{ block "body" . }}{{ end }}
+
+    {{ if .Site.Params.enableDarkMode }}
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            });
+        }
+    </script>
+    {{ end }}
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const delay = parseInt(el.dataset.delay) || 0;
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85 && !el.classList.contains('visible')) {
+                    setTimeout(() => el.classList.add('visible'), delay);
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.2 });
+        timelineItems.forEach(item => timelineObserver.observe(item));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
