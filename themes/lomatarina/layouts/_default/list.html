@@ -1,0 +1,26 @@
+{{ define "main" }}
+<section class="posts-list">
+    <header class="section-header" style="padding-top: 120px; text-align: center;">
+        <h1 class="section-title">{{ .Title }}</h1>
+    </header>
+    <div class="posts-grid">
+        {{ range .Paginator.Pages }}
+        <article class="post-card reveal">
+            <a href="{{ .RelPermalink }}" class="post-card-link">
+                {{ with .Params.photos }}
+                {{ $first := index . 0 }}
+                {{ $photoName := replace $first "/data/photos/" "" }}
+                <div class="post-card-image"><img src="{{ printf "photos/%s" $photoName }}" alt="{{ $.Title }}"></div>
+                {{ end }}
+                <div class="post-card-content">
+                    <time class="post-card-date">{{ .Date.Format "2.1.2006" }}</time>
+                    <h2 class="post-card-title">{{ .Title }}</h2>
+                    {{ with .Params.location }}<span class="post-card-location">{{ . }}</span>{{ end }}
+                </div>
+            </a>
+        </article>
+        {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+</section>
+{{ end }}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} – {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{ partial "head.html" . }}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+    {{ block "head" . }}{{ end }}
+</head>
+<body class="dark-theme rice-paper">
+    <nav class="site-nav" id="site-nav">
+        <div class="nav-inner">
+            <a href="{{ .Site.BaseURL }}" class="nav-logo">
+                <span class="logo-text">{{ .Site.Title }}</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Avaa valikko">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="{{ .Site.BaseURL }}" class="nav-link">Etusivu</a>
+                <a href="{{ .Site.BaseURL }}#tarina" class="nav-link">Matka</a>
+                <a href="{{ .Site.BaseURL }}#tarina" class="nav-link">Matka</a>
+<a href="{{ .Site.BaseURL }}#video" class="nav-link">Video</a>
+<a href="{{ .Site.BaseURL }}#galleria" class="nav-link">Galleria</a>
+                <button class="theme-btn" id="theme-btn" aria-label="Vaihda teemaa">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-logo">{{ .Site.Title }}</span>
+                <p class="footer-tagline">{{ .Site.Params.footerNote }}</p>
+            </div>
+            <div class="footer-meta">
+                <span>&copy; {{ now.Year }} {{ .Site.Title }}</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        var themeBtn = document.getElementById('theme-btn');
+        var body = document.body;
+        if (localStorage.theme === 'light') { body.classList.add('light-theme'); body.classList.remove('dark-theme'); }
+        if (themeBtn) {
+            themeBtn.addEventListener('click', function() {
+                body.classList.toggle('light-theme');
+                body.classList.toggle('dark-theme');
+                localStorage.theme = body.classList.contains('light-theme') ? 'light' : 'dark';
+            });
+        }
+        var navToggle = document.getElementById('nav-toggle');
+        var navLinks = document.getElementById('nav-links');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('open');
+                navToggle.classList.toggle('open');
+            });
+        }
+        var reveals = document.querySelectorAll('.reveal');
+        function revealOnScroll() {
+            reveals.forEach(function(el) {
+                var delay = el.dataset.delay || 0;
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    setTimeout(function() { el.classList.add('visible'); }, delay);
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    })();
+    </script>
+    {{ block "scripts" . }}{{ end }}
+</body>
+</html>

@@ -1,20 +1,27 @@
-baseURL = 'https://jonisoini.github.io/hugo-site/'
-languageCode = 'fi-fi'
+baseURL = '/hugo-site/'
+languageCode = 'fi'
 title = 'Lomatarina'
-theme = 'hello-friend'
-timeout = '120s'
-
-[build]
-writeStats = true
-
-[frontmatter]
-date = [":default"]
+theme = 'lomatarina'
 
 [params]
-tripDateRange = '3.–9. huhtikuuta 2026'
-heroSubtitle = 'Seitsemän päivää Italian sydämessä – antiikin raunioista renessanssin helmiin'
-timelineIntro = 'Jokainen päivä oli oma seikkailunsa, täynnä yllätyksiä, herkullisia hetkiä ja ikimuistoisia näkyjä.'
-galleryIntro = 'Sadan kuvan sijaan tämä on se kymmenen kauneinta'
-footerNote = 'Generoitu autonomisesti Grok API + agentilla'
-enableDarkMode = true
-heroImage = 'https://picsum.photos/seed/roma-main/1920/1080'
+  tripDateRange = '3.–9.4.2026'
+  heroImage = 'photos/hero-placeholder.jpg'
+  heroSubtitle = 'Seitsemän päivää Italian sydämessä'
+  timelineIntro = 'Jokainen päivä oli oma seikkailunsa'
+  galleryIntro = 'Kuvia matkalta'
+  video = { poster = 'photos/video-thumb.jpg', embed = 'https://www.youtube.com/embed/test-japan-nature' }  # Test video
+  footerNote = 'Autonominen AI-matkapäiväkirja'
+
+[menu]
+  [[menu.main]]
+    name = 'Matka'
+    url = '#tarina'
+    weight = 1
+  [[menu.main]]
+    name = 'Video'
+    url = '#video'
+    weight = 2
+  [[menu.main]]
+    name = 'Galleria'
+    url = '#galleria'
+    weight = 3

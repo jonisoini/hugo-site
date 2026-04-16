@@ -1,0 +1,9 @@
+{{/* layouts/partials/maps-link.html */}}
+{{ with . }}
+{{ if and .lat .lng }}
+  <a href="https://maps.google.com/maps?q={{ .lat }},{{ .lng }}&z=14&hl=fi" target="_blank" rel="noopener" class="gps-link inline-flex items-center gap-1 px-3 py-1 bg-accent/20 text-accent hover:bg-accent/30 rounded-full text-sm transition-all">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    {{ if .name }}{{ .name }} – {{ end }}Avaa Google Maps
+  </a>
+{{ end }}
+{{ end }}

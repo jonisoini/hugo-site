@@ -1,0 +1,29 @@
+{{/* layouts/partials/video-card.html */}}
+{{ $poster := .poster | default "photos/video-thumb.jpg" }}
+{{ $embed := .embed | default "https://www.youtube.com/embed/dQw4w9WgXcQ" }}  {{/* Test Japan nature placeholder */}}
+
+<div class="video-overlay relative rounded-2xl overflow-hidden group cursor-pointer rice-paper shadow-lg hover:shadow-2xl transition-all duration-500" onclick="openVideo('{{ $embed }}')">
+  <img src="{{ $poster }}" alt="Testivideo: Japanin maaseutu" class="w-full h-64 object-cover">
+  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="play-btn w-20 h-20 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-all shadow-2xl">
+      <svg class="w-8 h-8 ml-2 text-wood" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+  </div>
+  <p class="absolute bottom-4 left-4 right-4 text-white font-medium text-sm drop-shadow-md">Japanin maaseudun rauhaa</p>
+</div>
+
+<script>
+function openVideo(embedUrl) {
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4';
+  modal.innerHTML = `
+    <div class="relative max-w-4xl max-h-full">
+      <button onclick="this.parentElement.parentElement.remove()" class="absolute -top-12 right-0 text-white text-2xl">&times;</button>
+      <iframe src="${embedUrl}?autoplay=1" class="w-full h-96 sm:h-[500px] rounded-xl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+}
+</script>

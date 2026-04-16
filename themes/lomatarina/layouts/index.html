@@ -1,0 +1,85 @@
+{{ define "main" }}
+<section class="hero">
+    <div class="hero-media">
+        {{ with .Site.Params.heroImage }}
+        <img src="{{ . }}" alt="{{ $.Site.Title }}" class="hero-image">
+        {{ end }}
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">{{ .Site.Params.tripDateRange }}</div>
+        <h1 class="hero-title">{{ .Site.Title }}</h1>
+        <p class="hero-subtitle">{{ .Site.Params.heroSubtitle }}</p>
+        <a href="#tarina" class="hero-scroll">
+            <span>Lue matkakertomus</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></svg>
+        </a>
+    </div>
+</section>
+
+{{ $posts := where (where .Site.Pages "Type" "in" (slice "posts")) "Kind" "page" }}
+
+{{ if gt (len $posts) 0 }}
+<section id="tarina" class="timeline-section">
+    <div class="section-container">
+        <header class="section-header">
+            <h2 class="section-title">Matkan tarina</h2>
+            <p class="section-intro">{{ .Site.Params.timelineIntro }}</p>
+        </header>
+        <div class="timeline">
+            {{ range $i, $post := $posts }}
+            <article class="timeline-item reveal" data-delay="{{ mul $i 150 }}">
+                <a href="{{ $post.RelPermalink }}" class="timeline-card">
+                    <div class="timeline-card-image">
+                        {{ with $post.Params.photos }}
+                        {{ $first := index . 0 }}
+                        {{ $photoName := $first | replaceRE "^/data/photos/" "" }}
+                        <img src="{{ printf "photos/%s" $photoName }}" alt="{{ $post.Title }}">
+                        {{ end }}
+                        <div class="timeline-card-overlay"></div>
+                    </div>
+                    <div class="timeline-card-content">
+                        <time class="timeline-date">{{ $post.Date.Format "2.1.2006" }}</time>
+                        <h3 class="timeline-title">{{ $post.Title }}</h3>
+                        <p class="timeline-excerpt">{{ $post.Summary | plainify | truncate 120 }}</p>
+                        {{ with $post.Params.location }}
+                        <span class="timeline-location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            {{ . }}
+                        </span>
+                        {{ end }}
+                    </div>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
+{{ $allPhotos := slice }}
+{{ range where (where .Site.Pages "Type" "in" (slice "posts")) "Kind" "page" }}
+    {{ with .Params.photos }}
+        {{ range . }}{{ $allPhotos = $allPhotos | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if gt (len $allPhotos) 0 }}
+<section id="galleria" class="gallery-section">
+    <div class="section-container">
+        <header class="section-header">
+            <h2 class="section-title">Galleria</h2>
+            <p class="section-intro">{{ .Site.Params.galleryIntro }}</p>
+        </header>
+        <div class="gallery-masonry">
+            {{ range $i, $photo := $allPhotos }}
+            {{ $photoName := $photo | replaceRE "^/data/photos/" "" }}
+            <div class="gallery-masonry-item reveal" data-delay="{{ mul (mod $i 6) 100 }}">
+                <img src="{{ printf "photos/%s" $photoName }}" alt="Galleria {{ add $i 1 }}" loading="lazy">
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+{{ end }}
