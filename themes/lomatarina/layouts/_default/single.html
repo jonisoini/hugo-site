@@ -12,9 +12,9 @@
         <div class="post-header-content">
             <div class="post-meta-top">
                 <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2.1.2006" }}</time>
-{{ with .Params.location }}
+{{ with .Params.lat }}
             <span class="post-location">
-              {{ partial "maps-link.html" (dict "lat" .lat "lng" .lng "name" .name) }}
+              {{ partial "maps-link.html" (dict "lat" . "lng" $.Params.lng "name" $.Params.location) }}
             </span>
           {{ end }}
             </div>
