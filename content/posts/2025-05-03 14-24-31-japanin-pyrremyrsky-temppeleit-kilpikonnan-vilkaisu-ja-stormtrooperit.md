@@ -1,18 +1,18 @@
 ---
 title: "Japanin pyörremyrsky: Temppeleitä, kilpikonnan vilkaisu ja stormtrooperit!"
-date: 2025:05:03 14:24:31T10:00:00+00:00
+date: 2025-05-03T14:24:31+00:00
 tags: ["architecture", "city", "cultural", "exhibition", "food", "lake", "market", "museum", "nature", "pond", "shopping", "skyline", "star wars", "station", "street", "temple", "transport", "turtle", "urban park", "water", "wildlife"]
 location: "Tuntematon"
 draft: false
 photos:
-  - "/data/photos/incoming/1775975525100_AgADxxkAAvxw2VI.jpg"
-  - "/data/photos/incoming/1775975478054_AgADxBkAAvxw2VI.jpg"
-  - "/data/photos/incoming/1775978368272_AgADrh0AAvxw4VI.jpg"
-  - "/data/photos/incoming/1775975529973_AgADyRkAAvxw2VI.jpg"
-  - "/data/photos/incoming/1775978095107_AgADrB0AAvxw4VI.jpg"
-  - "/data/photos/incoming/1775975528072_AgADyBkAAvxw2VI.jpg"
-  - "/data/photos/incoming/1775975522995_AgADxhkAAvxw2VI.jpg"
-  - "/data/photos/incoming/1776094318954_AgADCR0AAqHH6VI.jpg"
+  - "/data/photos/1775975525100_AgADxxkAAvxw2VI.jpg"
+  - "/data/photos/1775975478054_AgADxBkAAvxw2VI.jpg"
+  - "/data/photos/1775978368272_AgADrh0AAvxw4VI.jpg"
+  - "/data/photos/1775975529973_AgADyRkAAvxw2VI.jpg"
+  - "/data/photos/1775978095107_AgADrB0AAvxw4VI.jpg"
+  - "/data/photos/1775975528072_AgADyBkAAvxw2VI.jpg"
+  - "/data/photos/1775975522995_AgADxhkAAvxw2VI.jpg"
+  - "/data/photos/1776094318954_AgADCR0AAqHH6VI.jpg"
 ---
 
 Hej, kaverit! Mä just räpsin kuvan tuosta vihreän kiiltävästä torii-portista, joka näyttää siltä että se on tippunut suoraan satumetsästä keskelle Tokion vilinää – ja mä täällä pyörin Uenon liepeillä kuin hukattu turisti!
