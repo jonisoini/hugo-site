@@ -5,6 +5,7 @@ theme = 'lomatarina'
 
 [params]
   tripDateRange = '3.–9.4.2026'
+  heroImage = 'photos/1775975525100_AgADxxkAAvxw2VI.jpg'
   heroSubtitle = 'Seitsemän päivää Japanin sydämessä'
   timelineIntro = 'Jokainen päivä oli oma seikkailunsa'
   galleryIntro = 'Kuvia matkalta'
