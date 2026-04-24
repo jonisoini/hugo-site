@@ -17,6 +17,17 @@
     </div>
 </section>
 
+{{ with .Site.Params.video }}
+<section id="video" class="video-section">
+    <div class="section-container">
+        <header class="section-header">
+            <h2 class="section-title">Video</h2>
+        </header>
+        {{ partial "video-card.html" . }}
+    </div>
+</section>
+{{ end }}
+
 {{ $posts := where (where .Site.Pages "Type" "in" (slice "posts")) "Kind" "page" }}
 
 {{ if gt (len $posts) 0 }}
