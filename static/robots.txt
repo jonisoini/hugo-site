@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jonisoini.github.io/hugo-site/sitemap.xml
